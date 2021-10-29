@@ -61,7 +61,7 @@ def update_todo(id):
 @app.route("/form",methods=['POST'])
 def add_form():
     data=request.json
-    form_collection.insert_one({"_id":str(uuid.uuid4()),"name":data["name"],"email":data["email"], "edad":data["edad"], "genero":data["genero"], "vacunado":data["vacunado"]})
+    form_collection.insert_one({"_id":str(uuid.uuid4()),"nombre":data["nombre"],"matricula":data["matricula"], "campus":data["campus"], "irCampus":data["irCampus"]})
     return "Form added"
 
 @app.route("/form/list",methods=['GET'])
