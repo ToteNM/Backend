@@ -65,7 +65,7 @@ def add_form():
     return "Form added"
 
 @app.route("/form/list",methods=['GET'])
-def list_todo():
+def form_todo():
     forms = form_collection.find()
     response=[form for form in forms]
     return json.dumps(response, default=json_util.default)
