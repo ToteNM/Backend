@@ -63,3 +63,9 @@ def add_form():
     data=request.json
     form_collection.insert_one({"_id":str(uuid.uuid4()),"name":data["name"],"email":data["email"], "edad":data["edad"], "genero":data["genero"], "vacunado":data["vacunado"]})
     return "Form added"
+
+@app.route("/form/list",methods=['GET'])
+def list_todo():
+    forms = form_collection.find()
+    response=[form for form in forms]
+    return json.dumps(response, default=json_util.default)
