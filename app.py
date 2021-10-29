@@ -16,6 +16,7 @@ client = pymongo.MongoClient(CONNECTION_STRING,ssl_cert_reqs=ssl.CERT_NONE)
 db = client.get_database('flask_mongodb_atlas')
 user_collection = pymongo.collection.Collection(db, 'user_collection')
 todo_collection = pymongo.collection.Collection(db, 'todo_collection')
+form_collection = pymongo.collection.Collection(db, 'form_collection')
 
 
 @app.route("/")
@@ -56,3 +57,9 @@ def list_todo():
 def update_todo(id):
     todo=todo_collection.update_one({"_id":id},{"$set":{"done":True}})
     return f"Task {id} completed"
+
+@app.route("/form",methods=['POST'])
+def add_form():
+    data=request.json
+    form_collection.insert_one({"_id":str(uuid.uuid4()),"name":data["name"],"email":data["email"], "edad":data["edad"], "genero":data["genero"], "vacunado":data["vacunado"]})
+    return "Form added"
